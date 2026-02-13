@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Catch Thief"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="uid://b4hapt3kfo4p3"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 

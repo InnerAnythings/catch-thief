@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4hapt3kfo4p3"]
+
+[ext_resource type="Script" uid="uid://bgdq7scluf64p" path="res://scripts/main_menu.gd" id="1_0ykhv"]
+[ext_resource type="Texture2D" uid="uid://cdth10fpf7i7k" path="res://scenes/hieght.jpg" id="2_2wh52"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_0ykhv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hieght" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 467)
+scale = Vector2(1.13392, 0.917808)
+texture = ExtResource("2_2wh52")
+
+[node name="BtnPlay" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -38.5
+offset_right = 140.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0823529, 0.219608, 0.827451, 1)
+theme_override_font_sizes/font_size = 50
+text = "Start Game"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 352.0
+offset_top = 125.0
+offset_right = 785.0
+offset_bottom = 235.0
+theme_override_colors/font_color = Color(0.117647, 0.2, 0.713726, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 80
+text = "Catch Theif"
+
+[connection signal="pressed" from="CanvasLayer/BtnPlay" to="." method="_on_btn_play_pressed"]
