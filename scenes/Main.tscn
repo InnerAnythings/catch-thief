@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://chgmbrk5f106r"]
+[gd_scene load_steps=26 format=3 uid="uid://chgmbrk5f106r"]
 
 [ext_resource type="PackedScene" uid="uid://eta3wslxuisi" path="res://scenes/character_creator.tscn" id="1_rvslj"]
 [ext_resource type="Script" uid="uid://defop5x0yljv8" path="res://scripts/character_creator.gd" id="2_0bbpv"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://5vlxmxil1onk" path="res://assets/Sounds/2.mp3" id="20_2ofn6"]
 [ext_resource type="AudioStream" uid="uid://cyysxil1bxikw" path="res://assets/Sounds/3.mp3" id="21_xa025"]
 [ext_resource type="AudioStream" uid="uid://blv3u7wr31nc0" path="res://assets/Sounds/4.mp3" id="22_36rkl"]
+[ext_resource type="Texture2D" uid="uid://cdth10fpf7i7k" path="res://scenes/hieght.jpg" id="23_ebg2g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft6cd"]
 bg_color = Color(0.144063, 0.144063, 0.144062, 1)
@@ -143,8 +144,10 @@ layout_mode = 2
 text = "Confirm"
 
 [node name="LabelScore" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_top = 575.0
+offset_right = 76.0
+offset_bottom = 598.0
+theme_override_colors/font_color = Color(0, 0, 0.745098, 1)
 text = "Score: 0/3"
 
 [node name="BtnRestart" type="Button" parent="CanvasLayer"]
@@ -156,16 +159,17 @@ text = "Restart"
 
 [node name="LabelAttempts" type="Label" parent="CanvasLayer"]
 offset_left = 1.0
-offset_top = 29.0
+offset_top = 550.0
 offset_right = 125.0
-offset_bottom = 52.0
+offset_bottom = 573.0
+theme_override_colors/font_color = Color(0.178604, 0.410124, 1, 1)
 text = "Attempts Left: 8"
 
 [node name="LabelGameOver" type="Label" parent="CanvasLayer"]
-offset_left = 487.0
-offset_top = 310.0
-offset_right = 624.0
-offset_bottom = 344.0
+offset_left = 546.0
+offset_top = 558.0
+offset_right = 683.0
+offset_bottom = 592.0
 theme_override_colors/font_color = Color(0.890196, 0.113725, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.498039, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
@@ -173,10 +177,10 @@ text = "Game Over!"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-offset_left = 50.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 550.0
+offset_left = 60.0
+offset_top = 30.0
+offset_right = 210.0
+offset_bottom = 480.0
 
 [node name="HistoryList" type="VBoxContainer" parent="CanvasLayer/ScrollContainer"]
 layout_mode = 2
@@ -185,13 +189,22 @@ layout_mode = 2
 zoom = Vector2(0.5, 0.5)
 
 [node name="TargetCharacter" parent="." instance=ExtResource("1_rvslj")]
-position = Vector2(896, -397)
+position = Vector2(690, -350)
 scale = Vector2(0.54, 0.54)
 
 [node name="Character" parent="." instance=ExtResource("1_rvslj")]
 
 [node name="Hair" parent="Character" index="4"]
 modulate = Color(0.188235, 0.247059, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -4000
+offset_left = -1213.0
+offset_top = -658.0
+offset_right = 1405.0
+offset_bottom = 894.0
+rotation = -0.00147909
+texture = ExtResource("23_ebg2g")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/BtnEyesPrev" to="." method="_on_btn_eyes_prev_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/BtnEyesNext" to="." method="_on_btn_eyes_next_pressed"]
