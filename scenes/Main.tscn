@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://chgmbrk5f106r"]
+[gd_scene load_steps=20 format=3 uid="uid://chgmbrk5f106r"]
 
 [ext_resource type="PackedScene" uid="uid://eta3wslxuisi" path="res://scenes/character_creator.tscn" id="1_rvslj"]
 [ext_resource type="Script" uid="uid://defop5x0yljv8" path="res://scripts/character_creator.gd" id="2_0bbpv"]
@@ -17,6 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://drl76i70f3xrc" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g4.png" id="15_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://ucg2x6ci8bs7" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g5.png" id="16_gsxep"]
 [ext_resource type="Texture2D" uid="uid://b7qtim64qcia" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g7.png" id="17_v0vrg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft6cd"]
+bg_color = Color(0.144063, 0.144063, 0.144062, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb450"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_0bbpv")
@@ -37,17 +43,93 @@ offset_top = -236.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="BtnEyes" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Change Eyes"
 
-[node name="BtnBrows" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="BtnEyesPrev" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Change Brows"
+size_flags_horizontal = 3
+text = "<"
 
-[node name="BtnMouth" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Change Mouths"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/outline_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ft6cd")
+text = "Eyes"
+horizontal_alignment = 1
+
+[node name="BtnEyesNext" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnBrowsPrev" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<"
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/outline_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb450")
+text = "Brows"
+horizontal_alignment = 1
+
+[node name="BtnBrowsNext" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnMouthPrev" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<"
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/outline_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb450")
+text = "Mouth"
+horizontal_alignment = 1
+
+[node name="BtnMouthNext" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnSkinPrev" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<"
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/outline_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb450")
+text = "Skin"
+horizontal_alignment = 1
+
+[node name="BtnSkinNext" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
 
 [node name="BtnConfirm" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -57,6 +139,13 @@ text = "Confirm"
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Score: 0/3"
+
+[node name="BtnRestart" type="Button" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 600.0
+offset_right = 372.0
+offset_bottom = 631.0
+text = "Restart"
 
 [node name="LabelAttempts" type="Label" parent="CanvasLayer"]
 offset_left = 1.0
@@ -76,6 +165,15 @@ theme_override_font_sizes/font_size = 24
 text = "Game Over!"
 horizontal_alignment = 1
 
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 550.0
+
+[node name="HistoryList" type="VBoxContainer" parent="CanvasLayer/ScrollContainer"]
+layout_mode = 2
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
@@ -85,10 +183,19 @@ scale = Vector2(0.54, 0.54)
 
 [node name="Character" parent="." instance=ExtResource("1_rvslj")]
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnEyes" to="." method="_on_btn_eyes_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnBrows" to="." method="_on_btn_brows_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnMouth" to="." method="_on_btn_mouth_pressed"]
+[node name="Hair" parent="Character" index="4"]
+modulate = Color(0.188235, 0.247059, 1, 1)
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/BtnEyesPrev" to="." method="_on_btn_eyes_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/BtnEyesNext" to="." method="_on_btn_eyes_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/BtnBrowsPrev" to="." method="_on_btn_brows_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/BtnBrowsNext" to="." method="_on_btn_brows_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer3/BtnMouthPrev" to="." method="_on_btn_mouth_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer3/BtnMouthNext" to="." method="_on_btn_mouth_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer4/BtnSkinPrev" to="." method="_on_btn_skin_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer4/BtnSkinNext" to="." method="_on_btn_skin_next_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnConfirm" to="." method="_on_btn_confirm_pressed"]
+[connection signal="pressed" from="CanvasLayer/BtnRestart" to="." method="_on_btn_restart_pressed"]
 
 [editable path="TargetCharacter"]
 [editable path="Character"]
