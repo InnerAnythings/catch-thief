@@ -19,8 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://b7qtim64qcia" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g7.png" id="17_v0vrg"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="CharacterCreator" parent="." instance=ExtResource("1_rvslj")]
 script = ExtResource("2_0bbpv")
 mouth_textures = Array[Texture2D]([ExtResource("3_ft6cd"), ExtResource("4_bb450"), ExtResource("5_nfivy"), ExtResource("6_1nqs0"), ExtResource("7_1iba3")])
 eyes_textures = Array[Texture2D]([ExtResource("8_yxlcp"), ExtResource("9_ebg2g"), ExtResource("10_2ofn6"), ExtResource("11_xa025"), ExtResource("12_36rkl")])
@@ -29,10 +27,15 @@ brows_textures = Array[Texture2D]([ExtResource("13_fs0b5"), ExtResource("14_ma7h
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 427.0
-offset_top = 2.0
-offset_right = 1151.0
-offset_bottom = 654.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -354.0
+offset_top = -236.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="BtnEyes" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -46,9 +49,46 @@ text = "Change Brows"
 layout_mode = 2
 text = "Change Mouths"
 
+[node name="BtnConfirm" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="LabelScore" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0/3"
+
+[node name="LabelAttempts" type="Label" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 29.0
+offset_right = 125.0
+offset_bottom = 52.0
+text = "Attempts Left: 8"
+
+[node name="LabelGameOver" type="Label" parent="CanvasLayer"]
+offset_left = 487.0
+offset_top = 310.0
+offset_right = 624.0
+offset_bottom = 344.0
+theme_override_colors/font_color = Color(0.890196, 0.113725, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.498039, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Game Over!"
+horizontal_alignment = 1
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnEyes" to="CharacterCreator" method="_on_btn_eyes_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnBrows" to="CharacterCreator" method="_on_btn_brows_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnMouth" to="CharacterCreator" method="_on_btn_mouth_pressed"]
+[node name="TargetCharacter" parent="." instance=ExtResource("1_rvslj")]
+position = Vector2(896, -397)
+scale = Vector2(0.54, 0.54)
+
+[node name="Character" parent="." instance=ExtResource("1_rvslj")]
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnEyes" to="." method="_on_btn_eyes_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnBrows" to="." method="_on_btn_brows_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnMouth" to="." method="_on_btn_mouth_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BtnConfirm" to="." method="_on_btn_confirm_pressed"]
+
+[editable path="TargetCharacter"]
+[editable path="Character"]
