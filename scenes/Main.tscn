@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://chgmbrk5f106r"]
+[gd_scene load_steps=25 format=3 uid="uid://chgmbrk5f106r"]
 
 [ext_resource type="PackedScene" uid="uid://eta3wslxuisi" path="res://scenes/character_creator.tscn" id="1_rvslj"]
 [ext_resource type="Script" uid="uid://defop5x0yljv8" path="res://scripts/character_creator.gd" id="2_0bbpv"]
@@ -17,6 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://drl76i70f3xrc" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g4.png" id="15_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://ucg2x6ci8bs7" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g5.png" id="16_gsxep"]
 [ext_resource type="Texture2D" uid="uid://b7qtim64qcia" path="res://assets/brows/ExpressionsAssetByVerzatileDevIndiv__g7.png" id="17_v0vrg"]
+[ext_resource type="AudioStream" uid="uid://c2t0nklhu5toq" path="res://assets/Sounds/0.mp3" id="18_yxlcp"]
+[ext_resource type="AudioStream" uid="uid://dqckeh12efo0e" path="res://assets/Sounds/1.mp3" id="19_ebg2g"]
+[ext_resource type="AudioStream" uid="uid://5vlxmxil1onk" path="res://assets/Sounds/2.mp3" id="20_2ofn6"]
+[ext_resource type="AudioStream" uid="uid://cyysxil1bxikw" path="res://assets/Sounds/3.mp3" id="21_xa025"]
+[ext_resource type="AudioStream" uid="uid://blv3u7wr31nc0" path="res://assets/Sounds/4.mp3" id="22_36rkl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft6cd"]
 bg_color = Color(0.144063, 0.144063, 0.144062, 1)
@@ -30,6 +35,7 @@ mouth_textures = Array[Texture2D]([ExtResource("3_ft6cd"), ExtResource("4_bb450"
 eyes_textures = Array[Texture2D]([ExtResource("8_yxlcp"), ExtResource("9_ebg2g"), ExtResource("10_2ofn6"), ExtResource("11_xa025"), ExtResource("12_36rkl")])
 brows_textures = Array[Texture2D]([ExtResource("13_fs0b5"), ExtResource("14_ma7h6"), ExtResource("15_e2s0e"), ExtResource("16_gsxep"), ExtResource("17_v0vrg")])
 character_scene = ExtResource("1_rvslj")
+score_sounds = Array[AudioStream]([ExtResource("18_yxlcp"), ExtResource("19_ebg2g"), ExtResource("20_2ofn6"), ExtResource("21_xa025"), ExtResource("22_36rkl")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

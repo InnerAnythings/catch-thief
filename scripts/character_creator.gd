@@ -22,6 +22,10 @@ const ATTEMPTS_START = 8
 @export var brows_textures: Array[Texture2D]
 
 @export var character_scene: PackedScene
+@export var score_sounds: Array[AudioStream]
+
+# Audio player used to play feedback for confirm results (index 0..4)
+var audio_player: AudioStreamPlayer
 
 # Define Skin Colors (White -> Dark Grey)
 var skin_colors: Array[Color] = [
@@ -60,6 +64,11 @@ var is_game_over: bool = false
 func _ready() -> void:
 	# Initialize the Random Number Generator
 	randomize()
+
+	# Create an AudioStreamPlayer to play feedback sounds
+	audio_player = AudioStreamPlayer.new()
+	add_child(audio_player)
+
 	start_new_game()
 
 func start_new_game() -> void:
@@ -302,6 +311,13 @@ func _on_btn_confirm_pressed() -> void:
 	update_ui_labels(correct_count)
 	
 	add_history_entry(correct_count)
+
+	# Play the feedback sound for this score (if assigned)
+	if score_sounds and score_sounds.size() > correct_count:
+		var s = score_sounds[correct_count]
+		if s:
+			audio_player.stream = s
+			audio_player.play()
 
 	# WIN CONDITION
 	if correct_count == 4:
