@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4hapt3kfo4p3"]
 
-[ext_resource type="Script" uid="uid://bgdq7scluf64p" path="res://scripts/main_menu.gd" id="1_0ykhv"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0ykhv"]
 [ext_resource type="Texture2D" uid="uid://cdth10fpf7i7k" path="res://scenes/hieght.jpg" id="2_2wh52"]
 
 [node name="MainMenu" type="Node2D"]
@@ -8,9 +8,26 @@ script = ExtResource("1_0ykhv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Label2" type="Label" parent="CanvasLayer"]
+z_index = 3
+offset_left = 69.0
+offset_top = 399.0
+offset_right = 1095.0
+offset_bottom = 679.0
+theme_override_colors/font_color = Color(0.117647, 0.2, 0.713726, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 40
+text = "Credits: 
+Art By : Saeed-Eldin, VerzatileDev
+Core Gameplay by : Micheal Ehab
+عاطف معاهم فالتيم: احمد هشام"
+
 [node name="Hieght" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(576, 467)
-scale = Vector2(1.13392, 0.917808)
+position = Vector2(577, 328)
+scale = Vector2(1.12414, 0.634051)
 texture = ExtResource("2_2wh52")
 
 [node name="BtnPlay" type="Button" parent="CanvasLayer"]

@@ -38,6 +38,7 @@ var skin_colors: Array[Color] = [
 
 # UI Nodes
 @onready var label_score: Label = $CanvasLayer/LabelScore
+@onready var label_credits: Label = $CanvasLayer/LabelCredits
 @onready var label_attempts: Label = $CanvasLayer/LabelAttempts
 @onready var label_game_over: Label = $CanvasLayer/LabelGameOver
 @onready var btn_restart: Button = $CanvasLayer/BtnRestart
@@ -329,7 +330,7 @@ func _on_btn_confirm_pressed() -> void:
 func game_over(did_win: bool) -> void:
 	is_game_over = true
 	# Reveal the secret character!
-	$TargetCharacter.modulate = Color.WHITE 
+	$TargetCharacter.modulate = Color.WHITE
 	label_game_over.visible = true
 	btn_restart.visible = true
 	if did_win:
@@ -337,6 +338,7 @@ func game_over(did_win: bool) -> void:
 		label_game_over.modulate = Color.GREEN
 	else:
 		label_game_over.text = "GAME OVER!"
+		
 		label_game_over.modulate = Color.RED
 
 
