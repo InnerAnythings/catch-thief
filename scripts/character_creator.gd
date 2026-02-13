@@ -21,6 +21,8 @@ const ATTEMPTS_START = 8
 @export var eyes_textures: Array[Texture2D]
 @export var brows_textures: Array[Texture2D]
 
+@export var character_scene: PackedScene
+
 # Define Skin Colors (White -> Dark Grey)
 var skin_colors: Array[Color] = [
 	Color("ffffff"), # White
@@ -116,48 +118,72 @@ func get_next_index(current: int, direction: int, max_size: int) -> int:
 func add_history_entry(score: int) -> void:
 	# 1. Create a container for this row
 	var row = HBoxContainer.new()
-	row.add_theme_constant_override("separation", 10) # Add space between items
+	row.add_theme_constant_override("separation", 20) # Add space between items
 	
 	# 2. Add Label for Attempt Number
 	var lbl_num = Label.new()
 	lbl_num.text = str(ATTEMPTS_START - attempts_left) + "." # "1.", "2." etc
+	lbl_num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	row.add_child(lbl_num)
 	
-	# 3. Create Mini Icons for what we picked
-	# Skin (Color Square)
-	var icon_skin = ColorRect.new()
-	icon_skin.custom_minimum_size = Vector2(30, 30)
-	icon_skin.color = skin_colors[p_skin_idx]
-	row.add_child(icon_skin)
+	# 3. Create a Container for the Mini Character
+	# Node2Ds (Sprites) don't work directly in UI boxes, so we wrap them in a Control node.
+	var char_container = Control.new()
+	char_container.custom_minimum_size = Vector2(150, 150) # Space reserved for the character
 	
-	# Eyes (Texture)
-	if eyes_textures.size() > 0:
-		row.add_child(create_mini_texture(eyes_textures[p_eyes_idx]))
+	# 4. INSTANTIATE THE SCENE
+	if character_scene:
+		var mini_char = character_scene.instantiate()
 		
-	# Brows (Texture)
-	if brows_textures.size() > 0:
-		row.add_child(create_mini_texture(brows_textures[p_brows_idx]))
+		# Set the Scale (Make it small to fit the box!)
+		# Adjust '0.2' depending on how big your original images are.
+		mini_char.scale = Vector2(0.2, 0.2) 
 		
-	# Mouth (Texture)
-	if mouth_textures.size() > 0:
-		row.add_child(create_mini_texture(mouth_textures[p_mouth_idx]))
+		# Center it in the container (Offset by half the container size)
+		mini_char.position = Vector2(50, 50)
+		
+		# 5. APPLY TEXTURES (Look up the nodes inside the new instance)
+		# We use get_node() because this is a new separate instance, not the one on screen.
+		
+		# Body/Skin
+		if mini_char.has_node("Head"):
+			mini_char.get_node("Head").modulate = skin_colors[p_skin_idx]
+			
+		# Mouth
+		if mini_char.has_node("Mouth") and mouth_textures.size() > 0:
+			mini_char.get_node("Mouth").texture = mouth_textures[p_mouth_idx]
+			
+		# Eyes
+		if mini_char.has_node("Eyes") and eyes_textures.size() > 0:
+			mini_char.get_node("Eyes").texture = eyes_textures[p_eyes_idx]
+			
+		# Brows
+		if mini_char.has_node("Brows") and brows_textures.size() > 0:
+			mini_char.get_node("Brows").texture = brows_textures[p_brows_idx]
+			
+		# Add the mini character to the container
+		char_container.add_child(mini_char)
+		
+	row.add_child(char_container)
 	
-	# 4. Add Score Label
+	# 6. Add Score Label
 	var lbl_score = Label.new()
 	lbl_score.text = "Score: " + str(score)
-	# Color code the score
+	lbl_score.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	
 	if score == 4: lbl_score.modulate = Color.GREEN
 	elif score == 0: lbl_score.modulate = Color.RED
 	else: lbl_score.modulate = Color.YELLOW
 		
 	row.add_child(lbl_score)
 	
-	# 5. Add the row to the list
+	# 7. Add to the list
 	history_list.add_child(row)
 	
-	# Optional: Scroll to bottom
+	# Scroll to bottom
 	await get_tree().process_frame
 	$CanvasLayer/ScrollContainer.scroll_vertical = $CanvasLayer/ScrollContainer.get_v_scroll_bar().max_value
+
 
 # Helper to make small icons
 func create_mini_texture(tex: Texture2D) -> TextureRect:
@@ -173,6 +199,54 @@ func create_mini_texture(tex: Texture2D) -> TextureRect:
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	tr.add_child(bg)
 	return tr
+
+# This function builds a "Mini Character" by stacking TextureRects
+func create_composite_character() -> Control:
+	# A container to hold the layers
+	var container = Control.new()
+	container.custom_minimum_size = Vector2(60, 60) # Size of the mini image
+	
+	# We need the base texture of the body to start
+	# We grab it directly from the player sprite
+	var body_tex = p_body.texture 
+	
+	# -- LAYER 1: BODY --
+	var layer_body = TextureRect.new()
+	layer_body.texture = body_tex
+	layer_body.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	layer_body.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	layer_body.set_anchors_preset(Control.PRESET_FULL_RECT) # Fill the container
+	layer_body.modulate = skin_colors[p_skin_idx] # Apply skin color!
+	container.add_child(layer_body)
+	
+	# -- LAYER 2: MOUTH --
+	if mouth_textures.size() > 0:
+		var layer_mouth = TextureRect.new()
+		layer_mouth.texture = mouth_textures[p_mouth_idx]
+		layer_mouth.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		layer_mouth.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		layer_mouth.set_anchors_preset(Control.PRESET_FULL_RECT)
+		container.add_child(layer_mouth)
+
+	# -- LAYER 3: EYES --
+	if eyes_textures.size() > 0:
+		var layer_eyes = TextureRect.new()
+		layer_eyes.texture = eyes_textures[p_eyes_idx]
+		layer_eyes.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		layer_eyes.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		layer_eyes.set_anchors_preset(Control.PRESET_FULL_RECT)
+		container.add_child(layer_eyes)
+
+	# -- LAYER 4: BROWS --
+	if brows_textures.size() > 0:
+		var layer_brows = TextureRect.new()
+		layer_brows.texture = brows_textures[p_brows_idx]
+		layer_brows.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		layer_brows.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		layer_brows.set_anchors_preset(Control.PRESET_FULL_RECT)
+		container.add_child(layer_brows)
+		
+	return container
 
 # --- BUTTON INPUTS ---
 # EYES

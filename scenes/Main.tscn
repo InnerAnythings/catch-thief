@@ -29,6 +29,7 @@ script = ExtResource("2_0bbpv")
 mouth_textures = Array[Texture2D]([ExtResource("3_ft6cd"), ExtResource("4_bb450"), ExtResource("5_nfivy"), ExtResource("6_1nqs0"), ExtResource("7_1iba3")])
 eyes_textures = Array[Texture2D]([ExtResource("8_yxlcp"), ExtResource("9_ebg2g"), ExtResource("10_2ofn6"), ExtResource("11_xa025"), ExtResource("12_36rkl")])
 brows_textures = Array[Texture2D]([ExtResource("13_fs0b5"), ExtResource("14_ma7h6"), ExtResource("15_e2s0e"), ExtResource("16_gsxep"), ExtResource("17_v0vrg")])
+character_scene = ExtResource("1_rvslj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
